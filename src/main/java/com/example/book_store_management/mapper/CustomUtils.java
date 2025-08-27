@@ -1,4 +1,4 @@
-package com.example.book_store_management.utils;
+package com.example.book_store_management.mapper;
 
 import com.example.book_store_management.dto.AuthorDto;
 import com.example.book_store_management.dto.BookDto;

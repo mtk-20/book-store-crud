@@ -4,7 +4,7 @@ import com.example.book_store_management.dto.AuthorAndBookDto;
 import com.example.book_store_management.dto.BookDto;
 import com.example.book_store_management.entity.Author;
 import com.example.book_store_management.service.BookService;
-import com.example.book_store_management.utils.CustomUtils;
+import com.example.book_store_management.mapper.CustomUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,16 +14,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequiredArgsConstructor
+@RequestMapping("/api/book")
 public class BookController {
 
     private final BookService bookService;
     private final CustomUtils customUtils;
-
-    public BookController(BookService bookService, CustomUtils customUtils) {
-        this.bookService = bookService;
-        this.customUtils = customUtils;
-    }
 
     public AuthorAndBookDto toAuthorAndBookDto(Author author) {
         return new AuthorAndBookDto(
@@ -34,12 +30,12 @@ public class BookController {
         );
     }
 
-    @GetMapping("/book")
+    @GetMapping()
     public List<BookDto> getBooks() {
         return bookService.getAllBook();
     }
 
-    @GetMapping("/book/{id}")
+    @GetMapping("{id}")
     public BookDto getBooksById(@PathVariable("id") int id) {
         return bookService.getBookById(id);
     }

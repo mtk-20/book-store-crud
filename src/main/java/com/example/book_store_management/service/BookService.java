@@ -5,7 +5,7 @@ import com.example.book_store_management.entity.Author;
 import com.example.book_store_management.entity.Book;
 import com.example.book_store_management.repository.AuthorRepo;
 import com.example.book_store_management.repository.BookRepo;
-import com.example.book_store_management.utils.CustomUtils;
+import com.example.book_store_management.mapper.CustomUtils;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

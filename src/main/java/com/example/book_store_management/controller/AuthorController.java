@@ -2,6 +2,7 @@ package com.example.book_store_management.controller;
 
 import com.example.book_store_management.dto.AuthorDto;
 import com.example.book_store_management.service.AuthorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -9,21 +10,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequiredArgsConstructor
+@RequestMapping("/api/author")
 public class AuthorController {
 
     private final AuthorService authorService;
 
-    public AuthorController(AuthorService authorService) {
-        this.authorService = authorService;
-    }
-
-    @GetMapping("/author")
+    @GetMapping()
     public List<AuthorDto> getAuthors() {
         return authorService.getAuthor();
     }
 
-    @GetMapping("/author/{id}")
+    @GetMapping("/{id}")
     public AuthorDto getAuthorById(@PathVariable("id") int id) {
         return authorService.getAuthorById(id);
     }
