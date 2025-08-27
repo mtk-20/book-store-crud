@@ -22,7 +22,7 @@ public class AuthorController {
     }
 
     @GetMapping("/{id}")
-    public AuthorDto getAuthorById(@PathVariable("id") int id) {
+    public AuthorDto getAuthorsById(@PathVariable("id") int id) {
         return authorService.getAuthorById(id);
     }
 

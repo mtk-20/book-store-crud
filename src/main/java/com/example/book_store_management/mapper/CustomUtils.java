@@ -2,8 +2,10 @@ package com.example.book_store_management.mapper;
 
 import com.example.book_store_management.dto.AuthorDto;
 import com.example.book_store_management.dto.BookDto;
+import com.example.book_store_management.dto.UserDto;
 import com.example.book_store_management.entity.Author;
 import com.example.book_store_management.entity.Book;
+import com.example.book_store_management.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -43,5 +45,13 @@ public class CustomUtils {
         return book;
     }
 
+    public UserDto toUserDto(User user) {
+        return new UserDto(
+                user.getId(),
+                user.getName(),
+                user.getUserName(),
+                user.getEmail()
+        );
+    }
 
 }

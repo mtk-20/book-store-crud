@@ -22,7 +22,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<String> registerUser(@RequestBody RegisterDto registerDto) {
         authService.register(registerDto, "USER");
         return ResponseEntity.ok("User registered successfully!");
     }

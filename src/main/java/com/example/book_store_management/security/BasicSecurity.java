@@ -31,7 +31,7 @@ public class BasicSecurity {
                 .authorizeHttpRequests(request -> (
                         request
                                 .requestMatchers("/api/book", "/api/author", "/auth/login").permitAll())
-                                .requestMatchers("/api/book/**", "/api/author/**", "/auth/register", "/auth/register-admin").hasRole("ADMIN")
+                                .requestMatchers("/api/book/**", "/api/author/**", "/auth/users/**", "/auth/register", "/auth/register-admin").hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .build();
     }
@@ -55,6 +55,7 @@ public class BasicSecurity {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
