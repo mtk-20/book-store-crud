@@ -5,6 +5,7 @@ import com.example.book_store_management.dto.RegisterDto;
 import com.example.book_store_management.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,12 +21,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
         authService.register(registerDto, "USER");
         return ResponseEntity.ok("User registered successfully!");
     }
 
     @PostMapping("/register-admin")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> registerAdmin(@RequestBody RegisterDto registerDto) {
         authService.register(registerDto, "ADMIN");
         return ResponseEntity.ok("Admin registered successfully!");

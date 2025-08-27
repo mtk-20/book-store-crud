@@ -30,8 +30,8 @@ public class BasicSecurity {
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests(request -> (
                         request
-                                .requestMatchers("/api/book", "/api/author", "/auth/**").permitAll())
-                                .requestMatchers("/api/book/**", "/api/author/**").hasRole("ADMIN")
+                                .requestMatchers("/api/book", "/api/author", "/auth/login").permitAll())
+                                .requestMatchers("/api/book/**", "/api/author/**", "/auth/register", "/auth/register-admin").hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .build();
     }
