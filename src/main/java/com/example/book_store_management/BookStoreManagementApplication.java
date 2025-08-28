@@ -44,25 +44,25 @@ public class BookStoreManagementApplication {
 //            userRepo.save(admin);
 //            userRepo.save(user1);
 
-            if (roleRepo.findByName("ROLE_ADMIN").isEmpty()) {
+            if (!roleRepo.findByName("ROLE_ADMIN").isPresent()) {
                 Role adminRole = new Role();
                 adminRole.setName("ROLE_ADMIN");
                 roleRepo.save(adminRole);
             }
-            if (roleRepo.findByName("ROLE_USER").isEmpty()) {
+            if (!roleRepo.findByName("ROLE_USER").isPresent()) {
                 Role userRole = new Role();
                 userRole.setName("ROLE_USER");
                 roleRepo.save(userRole);
             }
 
-            if (userRepo.findByUserName("john").isEmpty()) {
+            if (!userRepo.findByUserName("john").isPresent()) {
                 User admin = new User("john doe", "john", passwordEncoder.encode("john"), "john@gmail.com");
                 Set<Role> adminRoles = new HashSet<>();
                 adminRoles.add(roleRepo.findByName("ROLE_ADMIN").get());
                 admin.setRoles(adminRoles);
                 userRepo.save(admin);
             }
-            if (userRepo.findByUserName("mary").isEmpty()) {
+            if (!userRepo.findByUserName("mary").isPresent()) {
                 User user1 = new User("mary jane", "mary", passwordEncoder.encode("mary"), "mary@gmail.com");
                 Set<Role> userRoles = new HashSet<>();
                 userRoles.add(roleRepo.findByName("ROLE_USER").get());

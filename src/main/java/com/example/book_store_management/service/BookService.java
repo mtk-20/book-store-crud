@@ -7,7 +7,7 @@ import com.example.book_store_management.entity.Book;
 import com.example.book_store_management.repository.AuthorRepo;
 import com.example.book_store_management.repository.BookRepo;
 import com.example.book_store_management.mapper.CustomUtils;
-import jakarta.persistence.EntityNotFoundException;
+import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,7 +35,7 @@ public class BookService {
         } else {
             bookPage = bookRepo.findAll(pageable);
         }
-        return bookPage.stream().map(customUtils::toBookDto).collect(Collectors.toUnmodifiableList());
+        return bookPage.stream().map(customUtils::toBookDto).collect(Collectors.toList());
         //return bookRepo.findAll().stream().map(customUtils::toBookDto).collect(Collectors.toList());
 
     }

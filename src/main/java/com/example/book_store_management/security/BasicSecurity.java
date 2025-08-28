@@ -27,11 +27,11 @@ public class BasicSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .httpBasic(Customizer.withDefaults())
-                .csrf(c -> c.disable())
-                .authorizeHttpRequests(request -> (
+                .csrf().disable()
+                .authorizeRequests((request) -> (
                         request
-                                .requestMatchers("/api/book", "/api/author", "/auth/login").permitAll())
-                                .requestMatchers("/api/book/**", "/api/author/**", "/auth/users/**", "/auth/register", "/auth/register-admin").hasRole("ADMIN")
+                                .antMatchers("/api/book", "/api/author", "/auth/login").permitAll())
+                                .antMatchers("/api/book/**", "/api/author/**", "/auth/users/**", "/auth/register", "/auth/register-admin").hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .build();
     }

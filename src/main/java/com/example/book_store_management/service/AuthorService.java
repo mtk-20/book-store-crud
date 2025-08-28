@@ -5,7 +5,7 @@ import com.example.book_store_management.dto.AuthorDto;
 import com.example.book_store_management.entity.Author;
 import com.example.book_store_management.repository.AuthorRepo;
 import com.example.book_store_management.mapper.CustomUtils;
-import jakarta.persistence.EntityNotFoundException;
+import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +30,7 @@ public class AuthorService {
     }
 
     public List<AuthorDto> getAuthor() {
-        return authorRepo.findAll().stream().map(customUtils::toAuthorDto).collect(Collectors.toUnmodifiableList());
+        return authorRepo.findAll().stream().map(customUtils::toAuthorDto).collect(Collectors.toList());
     }
 
     public AuthorWithBookDto getAuthorById(int id) {

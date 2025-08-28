@@ -24,7 +24,7 @@ public class UserService {
     private final CustomUtils customUtils;
 
     public List<UserDto> getAllUser() {
-        return userRepo.findAll().stream().map(customUtils::toUserDto).collect(Collectors.toUnmodifiableList());
+        return userRepo.findAll().stream().map(customUtils::toUserDto).collect(Collectors.toList());
     }
 
     public UserDto getUserById(int id) {
