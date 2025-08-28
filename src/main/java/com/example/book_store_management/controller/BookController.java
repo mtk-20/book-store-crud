@@ -1,8 +1,7 @@
 package com.example.book_store_management.controller;
 
-import com.example.book_store_management.dto.AuthorAndBookDto;
 import com.example.book_store_management.dto.BookDto;
-import com.example.book_store_management.entity.Author;
+import com.example.book_store_management.dto.BookWithAuthorDto;
 import com.example.book_store_management.service.BookService;
 import com.example.book_store_management.mapper.CustomUtils;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,22 +19,15 @@ public class BookController {
     private final BookService bookService;
     private final CustomUtils customUtils;
 
-    public AuthorAndBookDto toAuthorAndBookDto(Author author) {
-        return new AuthorAndBookDto(
-                author.getAuthorId(),
-                author.getName(),
-                author.getGenre(),
-                author.getBooks().stream().map(customUtils::toBookDto).collect(Collectors.toList())
-        );
-    }
-
     @GetMapping()
-    public List<BookDto> getBooks() {
-        return bookService.getAllBook();
+    public List<BookDto> getBooks(@RequestParam(defaultValue = "0") int page,
+                                  @RequestParam(defaultValue = "5") int size,
+                                  @RequestParam(required = false) String search) {
+        return bookService.getAllBook(page, size, search);
     }
 
     @GetMapping("{id}")
-    public BookDto getBooksById(@PathVariable("id") int id) {
+    public BookWithAuthorDto getBooksById(@PathVariable("id") int id) {
         return bookService.getBookById(id);
     }
 

@@ -1,18 +1,18 @@
 package com.example.book_store_management.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDto {
+@ToString
+public class BookWithAuthorDto {
 
     private int id;
     private String title;
     private float price;
-    private int authorId;
+    //private int authorId;
+
+    private AuthorDto authorDto;
 }

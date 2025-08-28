@@ -9,10 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDto {
+public class BooksOfAuthorDto {
 
     private int id;
     private String title;
     private float price;
-    private int authorId;
 }

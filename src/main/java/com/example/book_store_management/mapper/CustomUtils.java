@@ -1,8 +1,6 @@
 package com.example.book_store_management.mapper;
 
-import com.example.book_store_management.dto.AuthorDto;
-import com.example.book_store_management.dto.BookDto;
-import com.example.book_store_management.dto.UserDto;
+import com.example.book_store_management.dto.*;
 import com.example.book_store_management.entity.Author;
 import com.example.book_store_management.entity.Book;
 import com.example.book_store_management.entity.User;
@@ -27,13 +25,18 @@ public class CustomUtils {
         return author;
     }
 
-    public BookDto toBookDto(Book book) {
-        return new BookDto(
-                book.getId(),
-                book.getTitle(),
-                book.getPrice(),
-                book.getAuthor().getAuthorId()
+    public BooksOfAuthorDto toBooksOfAuthorDto(Book book) {
+        return new BooksOfAuthorDto(book.getId(), book.getTitle(), book.getPrice());
+    }
+
+
+    public BookWithAuthorDto toBookWithAuthorDto(Book book) {
+        AuthorDto authorDto = new AuthorDto(
+                book.getAuthor().getAuthorId(),
+                book.getAuthor().getName(),
+                book.getAuthor().getGenre()
         );
+        return new BookWithAuthorDto(book.getId(), book.getTitle(), book.getPrice(), authorDto);
     }
 
     public Book toBookEntity(BookDto bookDto, Author author) {
@@ -43,6 +46,15 @@ public class CustomUtils {
         book.setPrice(bookDto.getPrice());
         book.setAuthor(author);
         return book;
+    }
+
+    public BookDto toBookDto(Book book) {
+        return new BookDto(
+                book.getId(),
+                book.getTitle(),
+                book.getPrice(),
+                book.getAuthor().getAuthorId()
+        );
     }
 
     public UserDto toUserDto(User user) {

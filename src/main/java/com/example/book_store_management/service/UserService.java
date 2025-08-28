@@ -35,18 +35,18 @@ public class UserService {
     public UserDto updateUser(int id, UserUpdateDto userUpdateDto) {
         User user = userRepo.findById(id).orElseThrow(() -> new IllegalStateException("User id not found."));
 
-        if (userUpdateDto.getUserName() != null && !userUpdateDto.getUserName().isEmpty()) {
+        if (userUpdateDto.getName() != null && !userUpdateDto.getName().isEmpty()) {
             user.setName(userUpdateDto.getName());
         }
 
-        if (userUpdateDto.getUserName() != null && !userUpdateDto.getUserName().isEmpty() && !user.getUserName().equals(userUpdateDto.getUserName())) {
+        if (userUpdateDto.getUserName() != null && !userUpdateDto.getUserName().isEmpty() && !user.getUserName().equalsIgnoreCase(userUpdateDto.getUserName())) {
             if (userRepo.existsByUserNameAndIdNot(userUpdateDto.getUserName(), id)) {
                 throw new UserNameAlreadyExistException("Username already taken.");
             }
             user.setUserName(userUpdateDto.getUserName());
         }
 
-        if (userUpdateDto.getEmail() != null && !userUpdateDto.getEmail().isEmpty() && !user.getEmail().equals(userUpdateDto.getEmail())) {
+        if (userUpdateDto.getEmail() != null && !userUpdateDto.getEmail().isEmpty() && !user.getEmail().equalsIgnoreCase(userUpdateDto.getEmail())) {
             if (userRepo.existsByEmailAndIdNot(userUpdateDto.getEmail(), id)) {
                 throw new EmailAlreadyExistException("Email already taken.");
             }
