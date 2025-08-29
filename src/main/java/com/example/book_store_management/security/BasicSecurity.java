@@ -30,7 +30,7 @@ public class BasicSecurity {
                 .csrf().disable()
                 .authorizeRequests((request) -> (
                         request
-                                .antMatchers("/api/book", "/api/author", "/auth/login").permitAll())
+                                .antMatchers("/api/book", "/api/author", "/auth/login", "/api/review/**").permitAll())
                                 .antMatchers("/api/book/**", "/api/author/**", "/auth/users/**", "/auth/register", "/auth/register-admin").hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .build();

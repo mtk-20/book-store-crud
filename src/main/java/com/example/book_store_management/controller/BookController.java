@@ -2,6 +2,7 @@ package com.example.book_store_management.controller;
 
 import com.example.book_store_management.dto.BookDto;
 import com.example.book_store_management.dto.BookWithAuthorDto;
+import com.example.book_store_management.dto.BookWithReviewDto;
 import com.example.book_store_management.service.BookService;
 import com.example.book_store_management.mapper.CustomUtils;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,11 @@ public class BookController {
     @GetMapping("{id}")
     public BookWithAuthorDto getBooksById(@PathVariable("id") int id) {
         return bookService.getBookById(id);
+    }
+
+    @GetMapping("/review/{id}")
+    public BookWithReviewDto getBookReviews(@PathVariable("id") int id) {
+        return bookService.getBookReviewById(id);
     }
 
     @PostMapping("/create-book")

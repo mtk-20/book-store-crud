@@ -2,12 +2,15 @@ package com.example.book_store_management.service;
 
 import com.example.book_store_management.dto.BookDto;
 import com.example.book_store_management.dto.BookWithAuthorDto;
+import com.example.book_store_management.dto.BookWithReviewDto;
 import com.example.book_store_management.entity.Author;
 import com.example.book_store_management.entity.Book;
 import com.example.book_store_management.repository.AuthorRepo;
 import com.example.book_store_management.repository.BookRepo;
 import com.example.book_store_management.mapper.CustomUtils;
 import javax.persistence.EntityNotFoundException;
+
+import com.example.book_store_management.repository.ReviewRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +28,16 @@ public class BookService {
     private final CustomUtils customUtils;
     private final BookRepo bookRepo;
     private final AuthorRepo authorRepo;
+    private final ReviewRepo reviewRepo;
+
+    public BookWithReviewDto toBookWithReviewDto(Book book) {
+        return new BookWithReviewDto(
+                book.getId(),
+                book.getTitle(),
+                book.getPrice(),
+                book.getReviews().stream().map(customUtils::toReviewDto).collect(Collectors.toList())
+        );
+    }
 
     public List<BookDto> getAllBook(int page, int size, String search) {
 
@@ -41,7 +54,11 @@ public class BookService {
     }
 
     public BookWithAuthorDto getBookById(int id) {
-        return customUtils.toBookWithAuthorDto(bookRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("no book id")));
+        return customUtils.toBookWithAuthorDto(bookRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("No book id.")));
+    }
+
+    public BookWithReviewDto getBookReviewById(int id) {
+        return toBookWithReviewDto(bookRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("No book id.")));
     }
 
     @Transactional
